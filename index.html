@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStore & Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <h1 id="app-title">📚 BookStore</h1>
+        <button id="nav-toggle" onclick="toggleView()">Go to Dashboard</button>
+    </nav>
+
+    <div class="container">
+
+        <div id="home-page" class="page active">
+            <h2>Available Books</h2>
+            <div id="book-grid" class="grid"></div>
+
+            <hr style="margin: 2rem 0;">
+
+            <h2>Your Cart</h2>
+            <div class="card">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items"></tbody>
+                </table>
+                <h3 style="margin-top: 1rem;">Total: $<span id="cart-total">0.00</span></h3>
+
+                <div class="qr-container" id="checkout-section" style="display:none;">
+                    <h4>Scan to Pay</h4>
+                    <p>Scan the QR code below to complete your order:</p>
+                    <img id="display-qr" src="" alt="Payment QR Code">
+                    <br><br>
+                    <button class="btn" onclick="completePurchase()">I Have Paid (Complete Order)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="dashboard-page" class="page">
+
+            <div class="card">
+                <h2 id="form-heading">Add New Book</h2>
+                <input type="hidden" id="edit-book-id">
+
+                <div class="form-group">
+                    <label>Book Title</label>
+                    <input type="text" id="book-title" placeholder="e.g., The Great Gatsby">
+                </div>
+
+                <div class="form-group">
+                    <label>Price ($)</label>
+                    <input type="number" id="book-price" placeholder="e.g., 15.99" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Thumbnail Image from Computer</label>
+                    <input type="file" id="book-image-file" accept="image/*">
+                </div>
+
+                <p style="text-align: center; margin: 0.5rem 0; font-weight: bold; color: #6b7280;">-- OR --</p>
+
+                <div class="form-group">
+                    <label>Paste Image URL Link</label>
+                    <input type="text" id="book-image-url" placeholder="e.g., https://images.unsplash.com/...">
+                </div>
+
+                <button class="btn" id="save-btn" onclick="saveBook()">Add Item</button>
+                <button class="btn btn-secondary" id="cancel-btn" onclick="resetForm()" style="display: none;">Cancel
+                    Edit</button>
+            </div>
+
+            <div class="card">
+                <h2>Manage Existing Books</h2>
+                <table class="statement-table">
+                    <thead>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manage-books-list"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>Payment Settings</h2>
+                <div class="form-group">
+                    <label>QR Code Image URL</label>
+                    <input type="text" id="qr-url-input" placeholder="Paste QR Code image link here">
+                </div>
+                <button class="btn" onclick="updateQR()">Update QR Code</button>
+            </div>
+
+            <div class="card">
+                <h2>Monthly Sales Statement</h2>
+                <table class="statement-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Items Bought</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statement-list"></tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
